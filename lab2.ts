@@ -16,3 +16,28 @@ var currentYear: any = d.getFullYear();
 
 //print result to div#p--today-date
 document.getElementById("p--today-date").innerHTML = "Today is " + currentDay + " " + currentMonth + " " + currentDate + ", " + currentYear + ".";
+
+/* PART 2 */
+
+//HTML ELEMENT
+let userBirthday: string;
+let btnBirthday = document.getElementById("button--birthday");
+let pBirthdayMsg = document.getElementById("p--birthday-message");
+
+function constructDateString(inputDate: Date): string {
+  let today: Date = new Date();
+  if((inputDate.getMonth() === today.getMonth()) && (inputDate.getDate() == today.getDate())) {
+    return 'Happy birthday!';
+  }
+
+  //return the date of the birthday of the current year
+  let currentYearBirthday: Date = new Date(today.getFullYear() + '-' + inputDate.getMonth() + '-' + inputDate.getDate());
+  return 'Your birthday is on ' + months[currentYearBirthday.getMonth()+1] + ' ' + currentYearBirthday.getDate() + ', '+ today.getFullYear();
+}
+
+btnBirthday.onclick = function() {
+  //assign userBirthday value to input value
+  userBirthday = document.getElementById("input--date-picker").value;
+  let userBirthdayDate: Date = new Date(userBirthday + " GMT-0400");
+  pBirthdayMsg.innerHTML = constructDateString(userBirthdayDate);
+}

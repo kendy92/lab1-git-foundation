@@ -36,3 +36,23 @@ var currentMonth = months[d.getMonth()];
 var currentYear = d.getFullYear();
 //print result to div#p--today-date
 document.getElementById("p--today-date").innerHTML = "Today is " + currentDay + " " + currentMonth + " " + currentDate + ", " + currentYear + ".";
+/* PART 2 */
+//HTML ELEMENT
+var userBirthday;
+var btnBirthday = document.getElementById("button--birthday");
+var pBirthdayMsg = document.getElementById("p--birthday-message");
+function constructDateString(inputDate) {
+    var today = new Date();
+    if ((inputDate.getMonth() === today.getMonth()) && (inputDate.getDate() == today.getDate())) {
+        return 'Happy birthday!';
+    }
+    //return the date of the birthday of the current year
+    var currentYearBirthday = new Date(today.getFullYear() + '-' + inputDate.getMonth() + '-' + inputDate.getDate());
+    return 'Your birthday is on ' + months[currentYearBirthday.getMonth() + 1] + ' ' + currentYearBirthday.getDate() + ', ' + today.getFullYear();
+}
+btnBirthday.onclick = function () {
+    //assign userBirthday value to input value
+    userBirthday = document.getElementById("input--date-picker").value;
+    var userBirthdayDate = new Date(userBirthday + " GMT-0400");
+    pBirthdayMsg.innerHTML = constructDateString(userBirthdayDate);
+};
